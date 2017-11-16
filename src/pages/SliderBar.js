@@ -9,8 +9,9 @@ const Menu = styled.section`
   align-items: center;
   height: 100vh; 
   fontSize: 12px;
-	background: #1D2638;
-	color: #fff;
+  background: #1D2638;
+  color: #fff;
+  overflow: hidden;
 `;
 
 const Person = styled.div`
@@ -62,7 +63,7 @@ export default class SliderBar extends Component {
           <Item><Icon className="iconfont icon-jiqiren"></Icon>智能建议</Item>
           <Item><Icon className="iconfont icon-1-biji"></Icon>读书笔记</Item>
         </ItemWrapper>
-		  </Menu>
+      </Menu>
     );
   }
 }
