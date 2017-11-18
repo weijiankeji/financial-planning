@@ -105,8 +105,8 @@ class SideBarWithoutRoute extends Component {
           {
             ItemData.map((item, i) => {
               return (
-                <RouteLink to={item.route}>
-                  <Item key={`MenuItem_${i}`} selected={i === this.state.selectedItem} onClick={() => {this.setState({selectedItem: i})}}> 
+                <RouteLink key={`MenuItem_${i}`} to={item.route}>
+                  <Item selected={i === this.state.selectedItem} onClick={() => {this.setState({selectedItem: i})}}> 
                       <Icon className={`iconfont icon-${item.className}`} />
                       {item.name}
                   </Item>
