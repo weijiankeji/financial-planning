@@ -51,7 +51,7 @@ const Item = styled.li`
   background-color: ${props => props.selected ? '#303c57' : '#1D2638'};
 `;
 
-const MyLink = styled(Link)`
+const RouteLink = styled(Link)`
   color: #646E84;
   text-decoration: none;
 `;
@@ -89,7 +89,7 @@ class SideBarWithoutRoute extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItem: ["", "dreamlist", "planning", "smartidea", "notes"].findIndex((p) => {return props.location.pathname == `/${p}`})
+      selectedItem: ["", "dreamlist", "planning", "smartidea", "notes"].findIndex((p) => {return props.location.pathname === `/${p}`})
     };
   }
 
@@ -105,12 +105,12 @@ class SideBarWithoutRoute extends Component {
           {
             ItemData.map((item, i) => {
               return (
-                <Item key={`MenuItem_${i}`} selected={i === this.state.selectedItem} onClick={() => {this.setState({selectedItem: i})}}>
-                  <MyLink to={item.route}>
-                    <Icon className={`iconfont icon-${item.className}`} />
-                    {item.name}
-                  </MyLink>
-                </Item>
+                <RouteLink to={item.route}>
+                  <Item key={`MenuItem_${i}`} selected={i === this.state.selectedItem} onClick={() => {this.setState({selectedItem: i})}}> 
+                      <Icon className={`iconfont icon-${item.className}`} />
+                      {item.name}
+                  </Item>
+                </RouteLink>
               );
             })
           }
