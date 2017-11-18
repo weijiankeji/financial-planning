@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
 import styled from 'styled-components';
 import '../font/iconfont.css';
 
@@ -36,6 +37,8 @@ const Introducation = styled.p`
 
 const ItemWrapper = styled.ul`
   width: 100%;
+  margin: 0px;
+  padding: 0px;
 `;
 
 const Icon = styled.i`
@@ -45,6 +48,7 @@ const Icon = styled.i`
 const Item = styled.li`
   list-style: none;
   padding: 10px;
+  background-color: ${props => props.selected ? '#303c57' : '#1D2638'};
 `;
 
 const MyLink = styled(Link)`
@@ -80,12 +84,12 @@ const ItemData = [
   }
 ]
 
-export class SliderBar extends Component {
+class SideBarWithoutRoute extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      selectItem: 0
+      selectedItem: ["", "dreamlist", "planning", "smartidea", "notes"].findIndex((p) => {return props.location.pathname == `/${p}`})
     };
   }
 
@@ -101,7 +105,7 @@ export class SliderBar extends Component {
           {
             ItemData.map((item, i) => {
               return (
-                <Item key={`MenuItem_${i}`} selected={i === this.state.selectItem}>
+                <Item key={`MenuItem_${i}`} selected={i === this.state.selectedItem} onClick={() => {this.setState({selectedItem: i})}}>
                   <MyLink to={item.route}>
                     <Icon className={`iconfont icon-${item.className}`} />
                     {item.name}
@@ -115,3 +119,7 @@ export class SliderBar extends Component {
     );
   }
 }
+
+export const SideBar = withRouter(SideBarWithoutRoute);
+
+

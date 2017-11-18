@@ -1,4 +1,4 @@
-export { SliderBar } from './SliderBar';
+export { SideBar } from './SideBar';
 export { OverView } from './OverView';
 export { DreamList } from './DreamList';
 export { Planning } from './Planning';
