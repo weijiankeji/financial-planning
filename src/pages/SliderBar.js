@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import '../font/iconfont.css';
 
 const Menu = styled.section`
   display: flex;
-  flex: 1;
   flex-direction: column;
+  min-width: 300px;
   align-items: center;
   height: 100vh; 
   fontSize: 12px;
@@ -44,10 +45,50 @@ const Icon = styled.i`
 const Item = styled.li`
   list-style: none;
   padding: 10px;
-  color: #646E84;
 `;
 
-export default class SliderBar extends Component {
+const MyLink = styled(Link)`
+  color: #646E84;
+  text-decoration: none;
+`;
+
+const ItemData = [
+  {
+    className: 'gailan',
+    route: '/',
+    name: '概览'
+  },
+  {
+    className: 'yuanwangqiang',
+    route: '/dreamList',
+    name: '愿望清单'
+  },
+  {
+    className: 'guihuashouru',
+    route: '/planning',
+    name: '收支规划'
+  },
+  {
+    className: 'jiqiren',
+    route: '/smartidea',
+    name: '智能建议'
+  },
+  {
+    className: '1-biji',
+    route: '/notes',
+    name: '读书笔记'
+  }
+]
+
+export class SliderBar extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectItem: 0
+    };
+  }
+
   render() {
     return (
       <Menu>
@@ -57,11 +98,18 @@ export default class SliderBar extends Component {
           <Introducation>心里有个发财梦</Introducation>
         </Person>
         <ItemWrapper>
-          <Item><Icon className="iconfont icon-gailan"></Icon>概览</Item>
-          <Item><Icon className="iconfont icon-yuanwangqiang"></Icon>愿望清单</Item>
-          <Item><Icon className="iconfont icon-guihuashouru"></Icon>收支规划</Item>
-          <Item><Icon className="iconfont icon-jiqiren"></Icon>智能建议</Item>
-          <Item><Icon className="iconfont icon-1-biji"></Icon>读书笔记</Item>
+          {
+            ItemData.map((item, i) => {
+              return (
+                <Item key={`MenuItem_${i}`} selected={i === this.state.selectItem}>
+                  <MyLink to={item.route}>
+                    <Icon className={`iconfont icon-${item.className}`} />
+                    {item.name}
+                  </MyLink>
+                </Item>
+              );
+            })
+          }
         </ItemWrapper>
       </Menu>
     );
