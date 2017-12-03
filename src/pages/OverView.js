@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { sliceArray } from '../utils/Array';
+import { BriefDreamList } from './DreamList';
+import { SavedMoney } from './Planning';
 
 const Container = styled.div`
   display: flex;
@@ -55,23 +57,20 @@ const Icon = styled.i`
   margin-right: 10px;
 `;
 
-const Picture = styled.img`
-  max-width: 150px;
-`
-
 const overviewData = sliceArray([
   {
     className: 'yuanwangqiang',
-    title: '还记得年少时的梦吗',
-    src: require('../images/wishingBottle.png')
+    title: '最近1个月的愿望',
+    component: <BriefDreamList />
   },
   {
     className: 'guihuashouru',
-    title: '我要买买买'
+    title: '已积累愿望基金',
+    component: <SavedMoney />
   },
   {
     className: 'jiqiren',
-    title: 'AI统治地球'
+    title: '机器人助手的建议'
   },
   {
     className: '1-biji',
@@ -97,7 +96,7 @@ export class OverView extends Component {
                     <Icon className={`iconfont icon-${item.className}`}></Icon>
                     {item.title}
                   </Title>
-                  {item.src ? <Picture src={item.src}></Picture> : null}
+                  {item.component}
                 </Item>
               );
             });
